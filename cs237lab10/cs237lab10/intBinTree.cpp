@@ -198,16 +198,37 @@ bool intBinTree::isSearchTree()
 
 bool intBinTree::isBST(intTreeNode* root)
 {
-	//TODO
+	if(root == NULL) {
+		return true;
+	} else if(isSubTreeLess(root->getLeftChildPtr(), root->getData()) &&
+		 isSubTreeGreater(root->getRightChildPtr(), root->getData())) {
+		return isBST(root->getLeftChildPtr()) && isBST(root->getRightChildPtr());
+	} else {
+		return false;
+	}		
 }
 
 bool intBinTree::isSubTreeLess(intTreeNode* root, int value)
 {
-	//TODO
+	if(root == NULL) {
+		return true;
+	} else if(root->getData() < value) {
+		return isSubTreeLess(root->getLeftChildPtr(), value) &&
+			isSubTreeLess(root->getRightChildPtr(), value);
+	} else {
+		return false;
+	}           
 }
 bool intBinTree::isSubTreeGreater(intTreeNode* root, int value)
 {
-	//TODO
+	if(root == NULL) {
+		return true;
+	} else if(root->getData() >= value) {
+		return isSubTreeGreater(root->getLeftChildPtr(), value) &&
+			isSubTreeGreater(root->getRightChildPtr(), value);
+	} else {
+		return false;
+	}
 }
 
 
@@ -218,7 +239,21 @@ void intBinTree::addForSearch(int item)
 
 intTreeNode*  intBinTree::addBST(intTreeNode* root, int item)
 {
-	//TODO
+	if(root == NULL) {
+		//throw runtime_error("Cannot add to empty node.");
+	} else if(item < root->getData()) {
+		if(root->getLeftChildPtr() == NULL) {
+			root->setLeftPtr(new intTreeNode(item));
+		} else {
+			addBST(root->getLeftChildPtr(), item);
+		}
+	} else {
+		if(root->getRightChildPtr() == NULL) {
+			root->setRightPtr(new intTreeNode(item));
+		}	else {
+			addBST(root->getRightChildPtr(), item);
+		}
+	}		
 }
 
 
@@ -229,7 +264,15 @@ bool intBinTree::inSearchTree(int target)
 
 bool intBinTree::inBST(intTreeNode* root, int item)
 {
-	//TODO
+	if(root == NULL) {
+		return false;
+	}	else if(root->getData() == item) {
+		return true;
+	} else if(root->getData() > item) {
+		return inBST(root->getLeftChildPtr(), item);
+	} else {
+		return inBST(root->getRightChildPtr(), item);
+	}
 }
 
 
