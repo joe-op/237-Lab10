@@ -54,7 +54,7 @@ ostream & operator<< (ostream & stream, const intTreeNode * nodePtr) {
 
 
 intTreeNode::~intTreeNode() {
-	cout << "intTreeNode destructor" << endl;
+	//	cout << "intTreeNode destructor" << endl;
 	delete leftChildPtr;
 	leftChildPtr = NULL;
 	delete rightChildPtr;

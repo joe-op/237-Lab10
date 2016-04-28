@@ -240,19 +240,11 @@ void intBinTree::addForSearch(int item)
 intTreeNode*  intBinTree::addBST(intTreeNode* root, int item)
 {
 	if(root == NULL) {
-		//throw runtime_error("Cannot add to empty node.");
+		return  new intTreeNode(item);
 	} else if(item < root->getData()) {
-		if(root->getLeftChildPtr() == NULL) {
-			root->setLeftPtr(new intTreeNode(item));
-		} else {
-			addBST(root->getLeftChildPtr(), item);
-		}
+		root->setLeftPtr(addBST(root->getLeftChildPtr(), item));
 	} else {
-		if(root->getRightChildPtr() == NULL) {
-			root->setRightPtr(new intTreeNode(item));
-		}	else {
-			addBST(root->getRightChildPtr(), item);
-		}
+		root->setRightPtr(addBST(root->getRightChildPtr(), item));
 	}		
 }
 
@@ -283,17 +275,26 @@ void intBinTree::preOrder()
 
 void intBinTree::preOrderTraversal(intTreeNode * current)
 {
-	//TODO
+		if(current != NULL) {
+			cout << current->getData() << " ";
+			preOrderTraversal(current->getLeftChildPtr());
+			preOrderTraversal(current->getRightChildPtr());
+		}
 }
 
 void intBinTree::postOrder()
 {
 	postOrderTraversal(root);
+		
 }
 
 void intBinTree::postOrderTraversal(intTreeNode * current)
 {
-	//TODO
+	if(current != NULL) {
+		postOrderTraversal(current->getLeftChildPtr());
+		postOrderTraversal(current->getRightChildPtr());
+		cout << current->getData() << " ";
+	}
 }
 void intBinTree::inOrderTraversal(ostream & stream, intTreeNode * current) {
 	if (current != NULL) {
