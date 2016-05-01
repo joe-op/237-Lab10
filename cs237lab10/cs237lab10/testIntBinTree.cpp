@@ -1,5 +1,16 @@
 #include "intBinTree.h"
 
+/*
+ * CS237 Lab 10
+ * Joe Opseth
+ * 2 May 2016
+ * On different traversal outputs:
+ * Preorder traversal descends and then ascends.
+ * Postorder traversal ascends and then descends.
+ */
+
+
+
 void pause_237(bool);
 
 
